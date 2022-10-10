@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +39,55 @@ class LoginPage extends StatelessWidget {
               ),
               Image.network(
                   'https://th.bing.com/th/id/OIP.FsGhfXy7oinbrRqBwcWeigHaEj?w=294&h=181&c=7&r=0&o=5&pid=1.7'),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        if (value != null && value.isNotEmpty && value.length < 5) {
+                          return "Your username should be more than 5 characters";
+                        } else if (value != null && value.isEmpty) {
+                          return "Please type your username";
+                        }
+                        return null;
+                      },
+                      controller: userNameController,
+                      /*  onChanged: (value){
+                        print(value);
+                      },*/
+                      decoration: InputDecoration(
+                        hintText: 'Add your username',
+                        hintStyle: TextStyle(color: Colors.blueGrey),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 24,
+                    ),
+
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Type your password',
+                        hintStyle: TextStyle(color: Colors.blueGrey),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 24,
+              ),
               ElevatedButton(
                 onPressed: loginUser,
-                child: Text('Click me!' , style: TextStyle(fontSize: 28,fontWeight: FontWeight.w300),),
-              ),
-              OutlinedButton(
-                onPressed: () {},
-                child: FlutterLogo(),
+                child: Text(
+                  'Login',
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w300),
+                ),
               ),
               TextButton(
                 onPressed: () {
@@ -57,6 +103,13 @@ class LoginPage extends StatelessWidget {
   }
 
   void loginUser() {
-    print('login successful');
+    if (_formKey != null && _formKey.currentState!.validate()) {
+      print(userNameController.text);
+      print(passwordController.text);
+      print('login successful');
+    }else{
+      print('login not successful');
+
+    }
   }
 }
