@@ -3,7 +3,9 @@ import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({Key? key, required this.username}) : super(key: key);
+
+  final String username;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: appBarText('Hi Yusuf'),
+        title: appBarText('Hi $username'),
         actions: [
           IconButton(
               onPressed: () {
@@ -39,10 +41,11 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  appBarText(title) {
+  Widget appBarText(String title) {
     return Align(
       alignment: Alignment.center,
-      child: Text('$title',
+      child: Text(title,
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 28,
         color: Colors.black,

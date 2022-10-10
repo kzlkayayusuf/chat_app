@@ -81,7 +81,7 @@ class LoginPage extends StatelessWidget {
                 height: 24,
               ),
               ElevatedButton(
-                onPressed: (){
+                onPressed: () {
                   loginUser(context);
                 },
                 child: Text(
@@ -110,7 +110,9 @@ class LoginPage extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChatPage(),
+          builder: (context) => ChatPage(
+            username: userNameController.text,
+          ),
         ),
       );
 
