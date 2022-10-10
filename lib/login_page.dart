@@ -1,7 +1,8 @@
 import 'package:chat_app/utils/spaces.dart';
-import 'package:chat_app/utils/textfield_styles.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -9,6 +10,9 @@ class LoginPage extends StatelessWidget {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  final Uri _url = Uri.parse('https://github.com/kzlkayayusuf');
+  final _mainUrl= 'https://github.com/kzlkayayusuf';
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +85,31 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.w300),
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                  print('Text Button clicked');
-                },
-                child: Text('https://www.youtube.com/'),
+              /*TextButton(
+                onPressed: _launchUrl,
+                child: Text(_mainUrl),
+              ),*/
+              verticalSpacing(24),
+              SocialLoginButton(
+                buttonType: SocialLoginButtonType.github,
+                onPressed: _launchUrl,
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    SocialLoginButton(
+                      buttonType: SocialLoginButtonType.twitter,
+                      mode: SocialLoginButtonMode.single,
+                      onPressed: () {},
+                    ),
+                    horizontalSpacing(24),
+                    SocialLoginButton(
+                      buttonType: SocialLoginButtonType.facebook,
+                      mode: SocialLoginButtonMode.single,
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -125,6 +149,11 @@ class LoginPage extends StatelessWidget {
       print('login successful');
     } else {
       print('login not successful');
+    }
+  }
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
     }
   }
 }

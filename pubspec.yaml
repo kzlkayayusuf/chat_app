@@ -1,5 +1,5 @@
 name: chat_app
-description: A new Flutter project.
+description: A Chat App from me.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -37,6 +37,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
+  url_launcher: ^6.1.6
+  social_login_buttons: ^1.0.6+2
 
 dev_dependencies:
   flutter_test:
