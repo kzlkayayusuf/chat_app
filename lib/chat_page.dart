@@ -3,12 +3,13 @@ import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key, required this.username}) : super(key: key);
+  const ChatPage({Key? key}) : super(key: key);
 
-  final String username;
+
 
   @override
   Widget build(BuildContext context) {
+    final username = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -17,7 +18,7 @@ class ChatPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context,'/');
               },
               icon: Icon(Icons.logout))
         ],
