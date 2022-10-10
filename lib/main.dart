@@ -1,5 +1,3 @@
-
-import 'package:chat_app/chat_page.dart';
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
@@ -13,8 +11,12 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Chat App",
-      theme: ThemeData(primarySwatch: Colors.orange),
-      home: ChatPage(),
+      theme: ThemeData(primarySwatch: Colors.orange,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.deepOrange,
+      ),),
+      home: LoginPage(),
     );
   }
 }

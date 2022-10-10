@@ -11,11 +11,11 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Hi Yusuf'),
+        title: appBarText('Hi Yusuf'),
         actions: [
           IconButton(
               onPressed: () {
-                print("Button clicked");
+                Navigator.pop(context);
               },
               icon: Icon(Icons.logout))
         ],
@@ -25,27 +25,28 @@ class ChatPage extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 itemCount: 10,
-                itemBuilder: (context,index){
-              return ChatBubble(
-                  alignment: index % 2 ==0 ? Alignment.centerRight : Alignment.centerLeft,
-                  message: "your message");
-            }),
-            /*ListView(
-              children: [
-                ChatBubble(
-                    alignment: Alignment.centerRight, message: "your message"),
-                ChatBubble(
-                    alignment: Alignment.centerLeft, message: "your message"),
-                ChatBubble(
-                    alignment: Alignment.centerRight, message: "your message"),
-                ChatBubble(
-                    alignment: Alignment.centerRight, message: "your message"),
-              ],
-            ),*/
+                itemBuilder: (context, index) {
+                  return ChatBubble(
+                      alignment: index % 2 == 0
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      message: "your message");
+                }),
           ),
           ChatInput(),
         ],
       ),
+    );
+  }
+
+  appBarText(title) {
+    return Align(
+      alignment: Alignment.center,
+      child: Text('$title',
+      style: TextStyle(
+        fontSize: 28,
+        color: Colors.black,
+      ),),
     );
   }
 }
