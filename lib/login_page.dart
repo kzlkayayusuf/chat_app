@@ -40,8 +40,9 @@ class LoginPage extends StatelessWidget {
                   letterSpacing: 0.5,
                 ),
               ),
-              Image.network(
-                  'https://th.bing.com/th/id/OIP.FsGhfXy7oinbrRqBwcWeigHaEj?w=294&h=181&c=7&r=0&o=5&pid=1.7'),
+              verticalSpacing(24),
+              Image.asset('assets/chatImage.jpg',height: 200,),
+              verticalSpacing(24),
               Form(
                 key: _formKey,
                 child: Column(
