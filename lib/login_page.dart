@@ -53,9 +53,6 @@ class LoginPage extends StatelessWidget {
                         return null;
                       },
                       controller: userNameController,
-                      /*  onChanged: (value){
-                        print(value);
-                      },*/
                       decoration: InputDecoration(
                         hintText: 'Add your username',
                         hintStyle: TextStyle(color: Colors.blueGrey),
