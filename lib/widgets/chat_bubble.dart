@@ -20,7 +20,7 @@ class ChatBubble extends StatelessWidget {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             Image.network(
-                'https://th.bing.com/th/id/OIP.FsGhfXy7oinbrRqBwcWeigHaEj?w=294&h=181&c=7&r=0&o=5&pid=1.7'),
+                'https://th.bing.com/th/id/OIP.FsGhfXy7oinbrRqBwcWeigHaEj?w=294&h=181&c=7&r=0&o=5&pid=1.7', height: 80,),
           ],
         ),
         margin: EdgeInsets.all(50),
