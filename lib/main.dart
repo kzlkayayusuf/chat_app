@@ -10,8 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AuthService.init();
   runApp(ChangeNotifierProvider(
-      create: (BuildContext context) => AuthService(),
-      child: ChatApp()));
+      create: (BuildContext context) => AuthService(), child: ChatApp()));
 }
 
 class ChatApp extends StatelessWidget {
@@ -29,11 +28,12 @@ class ChatApp extends StatelessWidget {
       ),
       home: FutureBuilder<bool>(
         future: context.read<AuthService>().isLoggedIn(),
-        builder: (context,AsyncSnapshot<bool> snapshot) {
-          if(snapshot.connectionState==ConnectionState.done){
-            if(snapshot.hasData && snapshot.data!){
+        builder: (context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData && snapshot.data!) {
               return ChatPage();
-            }else return  LoginPage();
+            } else
+              return LoginPage();
           }
           return CircularProgressIndicator();
         },
