@@ -1,3 +1,4 @@
+import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,12 @@ class ChatPage extends StatelessWidget {
                       alignment: index % 2 == 0
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
-                      message: "your message");
+                      entity: ChatMessageEntity(
+                        id: '1234',
+                        text: 'your message',
+                        createdAt: DateTime.now().microsecondsSinceEpoch,
+                        author: Author(userName: username),
+                      ),);
                 }),
           ),
           ChatInput(),
