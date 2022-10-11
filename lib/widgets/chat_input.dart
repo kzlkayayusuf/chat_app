@@ -20,14 +20,15 @@ class _ChatInputState extends State<ChatInput> {
 
   String _selectedImageUrl = '';
 
-  void onSendButtonPressed() {
+  Future<void> onSendButtonPressed() async {
+    String? userNameFromCache = await  context.read<AuthService>().getUserName();
     print('ChatMessage: ${chatMessageController.text}');
 
     final newChatMessage = ChatMessageEntity(
         text: chatMessageController.text,
         id: '255',
         createdAt: DateTime.now().microsecondsSinceEpoch,
-        author: Author(userName: context.read<AuthService>().getUserName()));
+        author: Author(userName: userNameFromCache!));
 
     if(_selectedImageUrl.isNotEmpty){
       newChatMessage.imageUrl=_selectedImageUrl;

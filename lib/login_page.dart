@@ -1,6 +1,8 @@
+import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/utils/spaces.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:social_media_buttons/social_media_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -91,8 +93,8 @@ class LoginPage extends StatelessWidget {
               ),
               verticalSpacing(24),
               ElevatedButton(
-                onPressed: () {
-                  loginUser(context);
+                onPressed: () async {
+                  await loginUser(context);
                 },
                 child: Text(
                   'Login',
@@ -146,10 +148,12 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void loginUser(context) {
+  Future<void> loginUser(BuildContext context) async {
     if (_formKey != null && _formKey.currentState!.validate()) {
       print(userNameController.text);
       print(passwordController.text);
+
+      await context.read<AuthService>().loginUser(userNameController.text);
 
       //Replacing routes using Navigator
       Navigator.pushReplacementNamed(

@@ -42,6 +42,7 @@ dependencies:
   http: any
   #for state management
   provider: ^6.0.4
+  shared_preferences: ^2.0.15
   social_login_buttons: ^1.0.6+2
   # using githup repo for dependencies
   social_media_buttons:
