@@ -60,7 +60,7 @@ class _ChatPageState extends State<ChatPage> {
                 itemCount: _messages.length,
                 itemBuilder: (context, index) {
                   return ChatBubble(
-                      alignment: _messages[index].author.userName == "zeynep"
+                      alignment: _messages[index].author.userName == "yusuf"
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
                       entity: _messages[index]);
