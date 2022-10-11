@@ -1,8 +1,11 @@
 import 'package:chat_app/models/chat_message_entity.dart';
+import 'package:chat_app/widgets/picker_body.dart';
 import 'package:flutter/material.dart';
 
+import '../repo/image_repository.dart';
+
 class ChatInput extends StatelessWidget {
-  ChatInput({Key? key,required this.onSubmit}) : super(key: key);
+  ChatInput({Key? key, required this.onSubmit}) : super(key: key);
 
   final chatMessageController = TextEditingController();
   final Function(ChatMessageEntity) onSubmit;
@@ -18,6 +21,8 @@ class ChatInput extends StatelessWidget {
     onSubmit(newChatMessage);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +31,14 @@ class ChatInput extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              //open a bottom sheet that shows a grid of images
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return NetworkImagePickerBody();
+                  });
+            },
             icon: Icon(Icons.add),
             color: Colors.white,
           ),
