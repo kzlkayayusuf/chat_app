@@ -13,7 +13,9 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Chat App",
-      theme: ThemeData(primarySwatch: BrandColor.primaryColor,
+      theme: ThemeData(
+        canvasColor: Colors.transparent,
+        primarySwatch: BrandColor.primaryColor,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.deepOrange,

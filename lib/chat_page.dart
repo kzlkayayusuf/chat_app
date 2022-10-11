@@ -53,6 +53,7 @@ class _ChatPageState extends State<ChatPage> {
     //_getNetworkImages();
     final username = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

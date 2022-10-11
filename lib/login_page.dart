@@ -13,11 +13,12 @@ class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   final Uri _url = Uri.parse('https://github.com/kzlkayayusuf');
-  final _mainUrl= 'https://github.com/kzlkayayusuf';
+  //final _mainUrl= 'https://github.com/kzlkayayusuf';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -46,7 +47,19 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               verticalSpacing(24),
-              Image.asset('assets/chatImage.jpg',height: 150,),
+              Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/chatImage.jpg')
+                  ),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+
+              ),
+              //Image.asset('assets/chatImage.jpg',height: 150,),
               verticalSpacing(24),
               Form(
                 key: _formKey,
