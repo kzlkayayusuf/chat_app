@@ -40,6 +40,8 @@ dependencies:
   url_launcher: ^6.1.6
   json_annotation: ^4.4.0
   http: any
+  #for state management
+  provider: ^6.0.4
   social_login_buttons: ^1.0.6+2
   # using githup repo for dependencies
   social_media_buttons:

@@ -1,11 +1,15 @@
 import 'package:chat_app/chat_page.dart';
+import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/utils/brand_color.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'login_page.dart';
 
 void main() {
-  runApp(ChatApp());
+  runApp(Provider(
+      create: (BuildContext context) => AuthService(),
+      child: ChatApp()));
 }
 
 class ChatApp extends StatelessWidget {
@@ -16,17 +20,15 @@ class ChatApp extends StatelessWidget {
       theme: ThemeData(
         canvasColor: Colors.transparent,
         primarySwatch: BrandColor.primaryColor,
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.deepOrange,
-      ),),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.deepOrange,
+        ),
+      ),
       home: LoginPage(),
       routes: {
-        '/chat' : (context) => ChatPage(),
+        '/chat': (context) => ChatPage(),
       },
     );
   }
 }
-
-
-
