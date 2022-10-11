@@ -39,6 +39,11 @@ dependencies:
   google_fonts: ^3.0.1
   url_launcher: ^6.1.6
   social_login_buttons: ^1.0.6+2
+  # using githup repo for dependencies
+  social_media_buttons:
+    git:
+      url: https://github.com/nrubin29/social_media_buttons
+      ref: null-safety
 
 dev_dependencies:
   flutter_test:

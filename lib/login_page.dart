@@ -2,6 +2,7 @@ import 'package:chat_app/utils/spaces.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:social_media_buttons/social_media_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
@@ -45,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               verticalSpacing(24),
-              Image.asset('assets/chatImage.jpg',height: 200,),
+              Image.asset('assets/chatImage.jpg',height: 150,),
               verticalSpacing(24),
               Form(
                 key: _formKey,
@@ -97,6 +98,20 @@ class LoginPage extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
+                    SocialMediaButton.twitter(
+                      onTap: (){},
+                      url: "https://twitter.com/kzlkayayusuf5",
+                      size: 28,
+                      color: Colors.blue,
+                    ),
+                    horizontalSpacing(24),
+                    SocialMediaButton.linkedin(
+                        url: "https://www.linkedin.com/in/kzlkayayusuf25/",
+                    ),
+                  ],
+                ),
+                /*Row(
+                  children: [
                     SocialLoginButton(
                       buttonType: SocialLoginButtonType.twitter,
                       mode: SocialLoginButtonMode.single,
@@ -109,7 +124,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ],
-                ),
+                ),*/
               ),
             ],
           ),
