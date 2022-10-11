@@ -1,13 +1,15 @@
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'models/image_model.dart';
+
 class ChatPage extends StatefulWidget {
-   ChatPage({Key? key}) : super(key: key);
+  ChatPage({Key? key}) : super(key: key);
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -15,37 +17,57 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   //initiate state of messages
-  List<ChatMessageEntity> _messages= [];
+  List<ChatMessageEntity> _messages = [];
 
-  _loadInitialMessages() async{
-    final response = await rootBundle.loadString('assets/mock_messages.json');
+  _loadInitialMessages() async {
+    rootBundle.loadString('assets/mock_messages.json').then((response) {
+      final List<dynamic> decodedList = jsonDecode(response) as List;
+      final List<ChatMessageEntity> _chatMessages = decodedList
+          .map((listItem) => ChatMessageEntity.fromJson(listItem))
+          .toList();
 
-    final List<dynamic> decodedList= jsonDecode(response) as List;
-    final List<ChatMessageEntity> _chatMessages= decodedList.map((listItem) => ChatMessageEntity.fromJson(listItem)).toList();
+      print(_chatMessages.length);
 
-    print(_chatMessages.length);
+      //final state of the messages
+      setState(() {
+        _messages = _chatMessages;
+      });
+    }).then((_) => print('done!'));
 
-    //final state of the messages
-    setState(() {
-      _messages=_chatMessages;
-    });
+    print('Something');
   }
 
-  onMessageSent(ChatMessageEntity entity){
+  onMessageSent(ChatMessageEntity entity) {
     _messages.add(entity);
-    setState(() {
+    setState(() {});
+  }
 
-    });
+  //get network images from api
+  _getNetworkImages() async {
+    var endpointUrl = Uri.parse('https://pixelford.com/api2/images');
+
+    final response = await http.get(endpointUrl);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedList = jsonDecode(response.body) as List;
+      final List<PixelFordImage> _imageList = decodedList
+          .map((listItem) => PixelFordImage.fromJson(listItem))
+          .toList();
+
+      print(_imageList[0].urlFullSize);
+    }
   }
 
   @override
   void initState() {
     _loadInitialMessages();
+    _getNetworkImages();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _getNetworkImages();
     final username = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.popAndPushNamed(context,'/');
+                Navigator.popAndPushNamed(context, '/');
               },
               icon: Icon(Icons.logout))
         ],
@@ -73,7 +95,9 @@ class _ChatPageState extends State<ChatPage> {
                       entity: _messages[index]);
                 }),
           ),
-          ChatInput(onSubmit: onMessageSent,),
+          ChatInput(
+            onSubmit: onMessageSent,
+          ),
         ],
       ),
     );
@@ -82,12 +106,14 @@ class _ChatPageState extends State<ChatPage> {
   Widget appBarText(String title) {
     return Align(
       alignment: Alignment.center,
-      child: Text(title,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 28,
-        color: Colors.black,
-      ),),
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 28,
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }
